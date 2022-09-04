@@ -1,5 +1,5 @@
 // :param person1Id: 933
-// :param person2Id: 8333
+// :param person2Id: 102
 
 MATCH path = shortestPath((person1:Person)-[:KNOWS*]-(person2:Person))
 WHERE person1.id = $person1Id AND person2.id = $person2Id

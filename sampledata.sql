@@ -106,6 +106,30 @@ CREATE TYPE TagType AS closed {
     tagClassId: bigint
 };
 
+CREATE TYPE Knows19Type AS closed {
+    person1id: bigint,
+    person2id: bigint,
+    weight: float
+};
+
+CREATE TYPE Knows20Type AS closed {
+    person1id: bigint,
+    person2id: bigint,
+    weight: int
+};
+
+CREATE TYPE Knows14Type AS closed {
+    person1id: bigint,
+    person2id: bigint,
+    weight: float
+};
+
+CREATE TYPE Knows15Type AS closed {
+    person1id: bigint,
+    person2id: bigint,
+    weight: float
+};
+
 CREATE DATASET Messages (MessageType)        PRIMARY KEY id;
 CREATE DATASET Forums (ForumType)            PRIMARY KEY id;
 CREATE DATASET ForumPerson (ForumPersonType) PRIMARY KEY forumId, personId;
@@ -120,6 +144,11 @@ CREATE DATASET Countries (LocationType)      PRIMARY KEY id;
 CREATE DATASET Continents (LocationType)     PRIMARY KEY id;
 CREATE DATASET TagClasses (TagClassType)     PRIMARY KEY id;
 CREATE DATASET Tags (TagType)                PRIMARY KEY id;
+CREATE DATASET Knows19 (Knows19Type)         PRIMARY KEY person1id, person2id;
+CREATE DATASET Knows20 (Knows20Type)         PRIMARY KEY person1id, person2id;
+CREATE DATASET Knows14 (Knows14Type)         PRIMARY KEY person1id, person2id;
+CREATE DATASET Knows15 (Knows15Type)         PRIMARY KEY person1id, person2id;
+
 
 LOAD DATASET Messages     USING localfs (("path"="127.0.0.1:///home/sushrut/datainput/messages.json"),("format"="json"));
 LOAD DATASET Forums       USING localfs (("path"="127.0.0.1:///home/sushrut/datainput/forums.json"),("format"="json"));
@@ -228,4 +257,20 @@ AS ( SELECT id, containerId FROM Cities ),
 
 EDGE (:Country)-[:IS_PART_OF_2]->(:Continent)
 SOURCE KEY (id) DESTINATION KEY (containerId)
-AS ( SELECT id, containerId FROM Countries );
+AS ( SELECT id, containerId FROM Countries ),
+
+EDGE (:Person)-[:KNOWS19]->(:Person)
+SOURCE KEY (person1id) DESTINATION KEY (person2id)
+AS ( SELECT person1id, person2id, weight FROM Knows19 ),
+
+EDGE (:Person)-[:KNOWS20]->(:Person)
+SOURCE KEY (person1id) DESTINATION KEY (person2id)
+AS ( SELECT person1id, person2id, weight FROM Knows20 ),
+
+EDGE (:Person)-[:KNOWS14]->(:Person)
+SOURCE KEY (person1id) DESTINATION KEY (person2id)
+AS ( SELECT person1id, person2id, weight FROM Knows14 ),
+
+EDGE (:Person)-[:KNOWS15]->(:Person)
+SOURCE KEY (person1id) DESTINATION KEY (person2id)
+AS ( SELECT person1id, person2id, weight FROM Knows15 );
