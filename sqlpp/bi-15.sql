@@ -9,13 +9,13 @@ LET w1 = (FROM GRAPH snb.snbGraph
           WHERE pA = personA AND pB = personB AND comment.isPost = false AND post.isPost = true AND
                 forum.creationDate >= 1313579421570 AND forum.creationDate <= 1342803345373
           SELECT VALUE COUNT(comment) )[0],
-	w2 = (FROM GRAPH snb.snbGraph
+    w2 = (FROM GRAPH snb.snbGraph
           MATCH (pA:Person)<-[:HAS_CREATOR]-(post:Message)<-[:REPLY_OF]-(comment:Message)-[:HAS_CREATOR]->(pB:Person),
                 (post)<-[:CONTAINER_OF]-(forum:Forum)
           WHERE pA = personA AND pB = personB AND comment.isPost = false AND post.isPost = true AND
                 forum.creationDate >= 1313579421570 AND forum.creationDate <= 1342803345373
           SELECT VALUE COUNT(comment) )[0],
-	w3 = (FROM GRAPH snb.snbGraph
+    w3 = (FROM GRAPH snb.snbGraph
           MATCH (pA:Person)<-[:HAS_CREATOR]-(c1:Message)-[:REPLY_OF]->(c2:Message)-[:HAS_CREATOR]->(pB:Person),
                 (c2)-[:REPLY_OF{2,2}]->(post:Message)<-[:CONTAINER_OF]-(forum:Forum)
           WHERE pA = personA AND pB = personB AND c1.isPost = false AND c2.isPost = false AND post.isPost = true AND

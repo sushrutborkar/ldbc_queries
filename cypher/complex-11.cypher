@@ -1,5 +1,5 @@
 // :param personId: 933
-// :param countryName: 'Bolivia'
+// :param countryName: 'China'
 // :param workFromYear: 2010
 
 MATCH (person:Person)-[:KNOWS*1..2]-(otherPerson:Person)-[w:WORK_AT]->(company:Company)-[:IS_LOCATED_IN]->(country:Country)

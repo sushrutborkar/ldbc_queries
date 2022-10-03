@@ -1,4 +1,4 @@
-// :param tag: Diego_Maradona
+// :param tag: Abbas_I_of_Persia
 
 MATCH (tag:Tag)<-[:HAS_TAG]-(m:Message)-[:HAS_CREATOR]->(person:Person)
 WHERE tag.name = $tag

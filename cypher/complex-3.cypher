@@ -1,15 +1,15 @@
 // :param personId: 933
-// :param startDate: 1313579421570
-// :param durationDays: 29223923803
+// :param startDate: 1275393600000
+// :param durationDays: 365
 // :param countryXName: 'India'
 // :param countryYName: 'China'
 
 MATCH (person:Person)-[:KNOWS*1..2]-(otherPerson:Person)
 WHERE person.id = $personId
 MATCH (otherPerson)<-[:HAS_CREATOR]-(m1:Message)-[:IS_LOCATED_IN]->(countryX:Country)
-WHERE $startDate <= m1.creationDate AND m1.creationDate < $startDate + $durationDays AND countryX.name = $countryXName
+WHERE $startDate <= m1.creationDate AND m1.creationDate < $startDate + $durationDays * 86400000 AND countryX.name = $countryXName
 MATCH (otherPerson)<-[:HAS_CREATOR]-(m2:Message)-[:IS_LOCATED_IN]->(countryY:Country)
-WHERE $startDate <= m2.creationDate AND m2.creationDate < $startDate + $durationDays AND countryY.name = $countryYName
+WHERE $startDate <= m2.creationDate AND m2.creationDate < $startDate + $durationDays * 86400000 AND countryY.name = $countryYName
 MATCH (otherPerson)-[:IS_LOCATED_IN]->(city:City)
 WHERE NOT exists((city)-[:IS_PART_OF]->(countryX)) AND NOT exists((city)-[:IS_PART_OF]->(countryY))
 WITH otherPerson, COUNT(DISTINCT m1) as xCount, COUNT(DISTINCT m2) as yCount

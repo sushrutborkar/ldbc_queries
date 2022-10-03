@@ -251,11 +251,11 @@ EDGE (:Company)-[:C_IS_LOCATED_IN]->(:Country)
 SOURCE KEY (id) DESTINATION KEY (placeId)
 AS ( SELECT id, placeId FROM Companies ),
 
-EDGE (:City)-[:IS_PART_OF_1]->(:Country)
+EDGE (:City)-[:IS_PART_OF]->(:Country)
 SOURCE KEY (id) DESTINATION KEY (containerId)
 AS ( SELECT id, containerId FROM Cities ),
 
-EDGE (:Country)-[:IS_PART_OF_2]->(:Continent)
+EDGE (:Country)-[:IS_PART_OF]->(:Continent)
 SOURCE KEY (id) DESTINATION KEY (containerId)
 AS ( SELECT id, containerId FROM Countries ),
 

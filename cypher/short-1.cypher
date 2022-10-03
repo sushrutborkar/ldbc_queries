@@ -1,4 +1,4 @@
-// :param personId: 4194
+// :param personId: 933
 
 MATCH (person:Person)-[:IS_LOCATED_IN]->(city:City)
 WHERE person.id = $personId

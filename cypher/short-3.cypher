@@ -1,4 +1,4 @@
-// :param personId: 4194
+// :param personId: 933
 
 MATCH (person:Person)-[knows:KNOWS]-(friend:Person)
 WHERE person.id = $personId

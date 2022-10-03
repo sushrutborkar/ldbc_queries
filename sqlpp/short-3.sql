@@ -1,6 +1,6 @@
-FROM GRAPH snb.snbGraph
+FROM  GRAPH snb.snbGraph
 MATCH (person:Person)-[knows:KNOWS]-(friend:Person)
-WHERE person.id = 4194
+WHERE person.id = 933
 SELECT
     friend.id,
     friend.firstName,

@@ -1,4 +1,4 @@
-// :param personId: 4194
+// :param personId: 933
 
 MATCH (person:Person)<-[:HAS_CREATOR]-(message:Message)
 WHERE person.id = $personId

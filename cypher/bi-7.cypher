@@ -1,4 +1,4 @@
-// :param tag: Diego_Maradona
+// :param tag: Abbas_I_of_Persia
 
 MATCH (tag:Tag)<-[:HAS_TAG]-(:Message)<-[:REPLY_OF]-(comment:Comment)-[:HAS_TAG]->(relatedTag:Tag)
 WHERE tag.name = $tag AND relatedTag.name <> $tag AND NOT exists((comment)-[:HAS_TAG]->(tag))

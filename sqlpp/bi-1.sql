@@ -13,12 +13,11 @@ LET year = get_year(datetime_from_unix_time_in_ms(message.creationDate)),
                       WHERE inner_m.creationDate < 1342803345373
                       AND inner_m.content IS NOT NULL
                       SELECT VALUE COUNT(inner_m) )[0]
-WHERE message.creationDate < 1342803345373 AND message.content IS NOT NULL
-GROUP BY year, isComment, lengthCategory, totalMessages
-GROUP AS g
-SELECT year, isComment, lengthCategory,
+WHERE     message.creationDate < 1342803345373 AND message.content IS NOT NULL
+GROUP BY  year, isComment, lengthCategory, totalMessages
+SELECT    year, isComment, lengthCategory,
     COUNT(*) AS messageCount,
-    (SELECT VALUE AVG(length(message.content)) FROM g)[0] AS averageMessageLength,
-    (SELECT VALUE SUM(length(message.content)) FROM g)[0] AS sumMessageLength,
+    AVG(length(message.content)) AS averageMessageLength,
+    SUM(length(message.content)) AS sumMessageLength,
     COUNT(*) * 100.0 / totalMessages AS percentageOfMessages
-ORDER BY year DESC, isComment ASC, lengthCategory ASC;
+ORDER BY  year DESC, isComment ASC, lengthCategory ASC;

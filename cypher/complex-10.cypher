@@ -2,7 +2,7 @@
 // :param month: 3
 
 MATCH (person:Person)-[:KNOWS*2..2]-(foaf:Person)-[:IS_LOCATED_IN]->(city:City)
-WHERE person.id = $personId AND NOT exists((person)-[:KNOWS]-(foaf))
+WHERE person.id = $personId AND NOT exists((person)-[:KNOWS]-(foaf)) AND NOT foaf=person
 WITH person, foaf, city, datetime({epochmillis: foaf.birthday}) AS bd
 WHERE (bd.month = $month AND bd.day >= 21) OR (bd.month = ($month%12)+1 AND bd.day < 22)
 OPTIONAL MATCH (person)-[:HAS_INTEREST]->(tag:Tag)<-[:HAS_TAG]-(post:Post)-[:HAS_CREATOR]->(foaf)
