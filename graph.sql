@@ -86,10 +86,26 @@ EDGE (:Company)-[:C_IS_LOCATED_IN]->(:Country)
 SOURCE KEY (id) DESTINATION KEY (placeId)
 AS ( SELECT id, placeId FROM Companies ),
 
-EDGE (:City)-[:IS_PART_OF_1]->(:Country)
+EDGE (:City)-[:IS_PART_OF]->(:Country)
 SOURCE KEY (id) DESTINATION KEY (containerId)
 AS ( SELECT id, containerId FROM Cities ),
 
-EDGE (:Country)-[:IS_PART_OF_2]->(:Continent)
+EDGE (:Country)-[:IS_PART_OF]->(:Continent)
 SOURCE KEY (id) DESTINATION KEY (containerId)
-AS ( SELECT id, containerId FROM Countries );
+AS ( SELECT id, containerId FROM Countries ),
+
+EDGE (:Person)-[:KNOWS19]->(:Person)
+SOURCE KEY (person1id) DESTINATION KEY (person2id)
+AS ( SELECT person1id, person2id, weight FROM Knows19 ),
+
+EDGE (:Person)-[:KNOWS20]->(:Person)
+SOURCE KEY (person1id) DESTINATION KEY (person2id)
+AS ( SELECT person1id, person2id, weight FROM Knows20 ),
+
+EDGE (:Person)-[:KNOWS14]->(:Person)
+SOURCE KEY (person1id) DESTINATION KEY (person2id)
+AS ( SELECT person1id, person2id, weight FROM Knows14 ),
+
+EDGE (:Person)-[:KNOWS15]->(:Person)
+SOURCE KEY (person1id) DESTINATION KEY (person2id)
+AS ( SELECT person1id, person2id, weight FROM Knows15 );

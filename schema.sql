@@ -206,6 +206,30 @@ CREATE TYPE TagType AS closed {
     tagClassId: bigint
 };
 
+CREATE TYPE Knows19Type AS closed {
+    person1id: bigint,
+    person2id: bigint,
+    weight: float
+};
+
+CREATE TYPE Knows20Type AS closed {
+    person1id: bigint,
+    person2id: bigint,
+    weight: int
+};
+
+CREATE TYPE Knows14Type AS closed {
+    person1id: bigint,
+    person2id: bigint,
+    weight: float
+};
+
+CREATE TYPE Knows15Type AS closed {
+    person1id: bigint,
+    person2id: bigint,
+    weight: float
+};
+
 CREATE DATASET Posts (PostType) PRIMARY KEY id;
 CREATE DATASET Comments (CommentType) PRIMARY KEY id;
 CREATE DATASET Messages_ (MessageType_) PRIMARY KEY id;
@@ -235,7 +259,9 @@ CREATE DATASET CommentTag (MessageTagType) PRIMARY KEY messageId, tagId;
 CREATE DATASET PostTag (MessageTagType) PRIMARY KEY messageId, tagId;
 CREATE DATASET TagClasses (TagClassType) PRIMARY KEY id;
 CREATE DATASET Tags (TagType) PRIMARY KEY id;
-
-
+CREATE DATASET Knows19 (Knows19Type) PRIMARY KEY person1id, person2id;
+CREATE DATASET Knows20 (Knows20Type) PRIMARY KEY person1id, person2id;
+CREATE DATASET Knows14 (Knows14Type) PRIMARY KEY person1id, person2id;
+CREATE DATASET Knows15 (Knows15Type) PRIMARY KEY person1id, person2id;
 
 

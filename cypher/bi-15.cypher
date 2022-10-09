@@ -1,9 +1,12 @@
+/*
 :param [{ person1Id, person2Id, startDate, endDate }] => { RETURN
     933 AS person1Id,
     4398046512764 AS person2Id,
     1313579421570 AS startDate,
     1342803345373 AS endDate
 }
+*/ 
+// copied from reference
 
 MATCH (person1:Person {id: $person1Id}), (person2:Person {id: $person2Id})
 CALL gds.shortestPath.dijkstra.stream({
